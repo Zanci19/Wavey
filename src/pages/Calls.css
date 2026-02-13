@@ -1,0 +1,420 @@
+.calls-content {
+  --background: var(--discord-background-primary);
+}
+
+.calls-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--discord-text-normal);
+}
+
+.quick-call-section {
+  padding: 24px 16px;
+  background: var(--discord-background-secondary);
+  margin-bottom: 16px;
+  border-radius: 0 0 16px 16px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--discord-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px 0;
+}
+
+.quick-call-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.quick-call-btn {
+  background: var(--discord-background-primary);
+  border: 2px solid var(--discord-background-accent);
+  border-radius: 12px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--discord-text-normal);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.quick-call-btn:active {
+  transform: scale(0.95);
+}
+
+.quick-call-btn.voice-call {
+  border-color: var(--discord-green);
+}
+
+.quick-call-btn.video-call {
+  border-color: var(--discord-blurple);
+}
+
+.quick-call-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.quick-call-btn.voice-call:hover {
+  background: var(--discord-green);
+  border-color: var(--discord-green);
+}
+
+.quick-call-btn.video-call:hover {
+  background: var(--discord-blurple);
+  border-color: var(--discord-blurple);
+}
+
+.call-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--discord-background-accent);
+  transition: all 0.3s ease;
+}
+
+.voice-call .call-icon-wrapper {
+  background: rgba(67, 181, 129, 0.2);
+}
+
+.video-call .call-icon-wrapper {
+  background: rgba(88, 101, 242, 0.2);
+}
+
+.call-icon-wrapper ion-icon {
+  font-size: 24px;
+  color: var(--discord-text-normal);
+}
+
+.voice-call:hover .call-icon-wrapper,
+.video-call:hover .call-icon-wrapper {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.call-history-section {
+  padding: 0 16px 80px 16px;
+}
+
+.call-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.call-history-item {
+  background: var(--discord-background-secondary);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.call-history-item:hover {
+  background: var(--discord-background-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.call-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.call-avatar {
+  width: 48px;
+  height: 48px;
+}
+
+.avatar-emoji {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: var(--discord-background-accent);
+  border-radius: 50%;
+}
+
+.call-details {
+  flex: 1;
+}
+
+.caller-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--discord-text-normal);
+  margin-bottom: 4px;
+}
+
+.call-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--discord-text-muted);
+}
+
+.call-type-icon {
+  font-size: 14px;
+}
+
+.call-type-icon.video {
+  color: var(--discord-blurple);
+}
+
+.call-type-icon.voice {
+  color: var(--discord-green);
+}
+
+.call-type-icon.missed {
+  color: var(--discord-red);
+}
+
+.incoming {
+  color: var(--discord-green);
+}
+
+.outgoing {
+  color: var(--discord-blurple);
+}
+
+.separator {
+  color: var(--discord-text-muted);
+}
+
+.call-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.recall-btn {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  height: 36px;
+  transition: transform 0.2s ease;
+}
+
+.recall-btn:active {
+  transform: scale(0.9);
+}
+
+.recall-btn.voice {
+  --color: var(--discord-green);
+}
+
+.recall-btn.video {
+  --color: var(--discord-blurple);
+}
+
+/* Active Call Modal */
+.call-modal {
+  --background: transparent;
+}
+
+.active-call-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, var(--discord-blurple) 0%, #7289DA 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.call-background {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px 20px 200px 20px;
+}
+
+.call-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.call-participant {
+  text-align: center;
+  z-index: 1;
+}
+
+.participant-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-emoji.large {
+  font-size: 64px;
+}
+
+.participant-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 8px 0;
+}
+
+.call-status {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 16px 0;
+}
+
+.call-timer {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 20px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.call-controls {
+  padding: 24px 20px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.control-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.control-btn ion-icon {
+  font-size: 24px;
+  color: white;
+}
+
+.control-btn:active {
+  transform: scale(0.9);
+}
+
+.control-btn.active {
+  background: var(--discord-red);
+}
+
+.end-call-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--discord-red);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.end-call-btn:active {
+  transform: scale(0.95);
+  background: #d93636;
+}
+
+.end-call-btn ion-icon {
+  font-size: 24px;
+}
+
+/* Animations */
+.animate-slide-in {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.animate-card {
+  animation: cardSlideIn 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes cardSlideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}

@@ -1,2 +1,125 @@
-/* For information on how to create your own theme, please refer to:
-http://ionicframework.com/docs/theming/ */
+/* Discord-inspired color scheme */
+:root {
+  /* Discord colors */
+  --discord-blurple: #5865F2;
+  --discord-dark: #23272A;
+  --discord-darker: #1E2124;
+  --discord-darkest: #2C2F33;
+  --discord-light: #99AAB5;
+  --discord-green: #43B581;
+  --discord-red: #F04747;
+  --discord-yellow: #FAA61A;
+  --discord-text-normal: #DCDDDE;
+  --discord-text-muted: #72767D;
+  --discord-text-link: #00B0F4;
+  --discord-background-primary: #36393F;
+  --discord-background-secondary: #2F3136;
+  --discord-background-tertiary: #202225;
+  --discord-background-accent: #4F545C;
+  --discord-background-floating: #18191C;
+  
+  /* Ionic variable overrides for Discord theme */
+  --ion-background-color: var(--discord-background-primary);
+  --ion-text-color: var(--discord-text-normal);
+  --ion-color-primary: var(--discord-blurple);
+  --ion-color-secondary: var(--discord-darkest);
+  --ion-color-tertiary: var(--discord-light);
+  --ion-color-success: var(--discord-green);
+  --ion-color-warning: var(--discord-yellow);
+  --ion-color-danger: var(--discord-red);
+  --ion-toolbar-background: var(--discord-background-tertiary);
+  --ion-toolbar-color: var(--discord-text-normal);
+  --ion-tab-bar-background: var(--discord-background-tertiary);
+  --ion-tab-bar-color: var(--discord-text-muted);
+  --ion-tab-bar-color-selected: var(--discord-text-normal);
+  --ion-item-background: var(--discord-background-secondary);
+}
+
+/* Global animations */
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Global styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--discord-background-accent) var(--discord-background-tertiary);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--discord-background-tertiary);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--discord-background-accent);
+  border-radius: 4px;
+}
