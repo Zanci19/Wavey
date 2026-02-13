@@ -216,6 +216,19 @@ src/
 - Check that Authentication and Firestore are enabled
 - Review Firestore security rules
 
+### WebRTC "Stream is undefined" error
+This error has been fixed with Node.js polyfills. If you still encounter it:
+- Clear your browser cache and hard reload (Ctrl+Shift+R)
+- Delete `node_modules` and reinstall: `npm install`
+- Ensure the Vite configuration includes the polyfills (already configured)
+
+The following polyfills are included for WebRTC compatibility:
+- `stream-browserify` - Stream implementation for browser
+- `events` - EventEmitter polyfill
+- `buffer` - Buffer polyfill
+- `process` - Process polyfill
+- `util` - Util polyfill
+
 ### Build errors
 - Delete `node_modules` and `package-lock.json`
 - Run `npm install` again
