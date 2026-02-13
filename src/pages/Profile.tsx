@@ -1,17 +1,55 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonAvatar, IonIcon, IonButton, IonItem, IonLabel, IonToggle, IonList } from '@ionic/react';
 import { settings, notifications, shield, moon, language, informationCircle, logOut, pencil, checkmarkCircle } from 'ionicons/icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { collection, query, where, getCountFromServer } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import { useAuth } from '../contexts/AuthContext';
+import { useHistory } from 'react-router-dom';
 import './Profile.css';
 
 const Profile: React.FC = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [messageCount, setMessageCount] = useState(0);
+  const [friendCount, setFriendCount] = useState(0);
+  const { currentUser, userData, logout } = useAuth();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!currentUser) return;
+
+    // Get message count
+    const fetchMessageCount = async () => {
+      const q = query(collection(db, 'messages'), where('userId', '==', currentUser.uid));
+      const snapshot = await getCountFromServer(q);
+      setMessageCount(snapshot.data().count);
+    };
+
+    // Get friend count
+    const fetchFriendCount = async () => {
+      const q = query(collection(db, 'friends'), where('userId', '==', currentUser.uid));
+      const snapshot = await getCountFromServer(q);
+      setFriendCount(snapshot.data().count);
+    };
+
+    fetchMessageCount();
+    fetchFriendCount();
+  }, [currentUser]);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      history.push('/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
 
   const stats = [
-    { label: 'Messages', value: '2,847', color: 'var(--discord-blurple)' },
-    { label: 'Friends', value: '156', color: 'var(--discord-green)' },
-    { label: 'Servers', value: '23', color: 'var(--discord-yellow)' },
+    { label: 'Messages', value: messageCount.toString(), color: 'var(--discord-blurple)' },
+    { label: 'Friends', value: friendCount.toString(), color: 'var(--discord-green)' },
+    { label: 'Online', value: '1d', color: 'var(--discord-yellow)' },
   ];
 
   return (
@@ -30,15 +68,15 @@ const Profile: React.FC = () => {
           <div className="profile-info animate-scale-in">
             <div className="avatar-container">
               <IonAvatar className="profile-avatar">
-                <div className="avatar-emoji">👤</div>
+                <div className="avatar-emoji">{userData?.photoURL || '👤'}</div>
               </IonAvatar>
               <div className="status-badge online">
                 <div className="status-dot"></div>
               </div>
             </div>
-            <h1 className="profile-name">WaveUser</h1>
-            <p className="profile-tag">#1234</p>
-            <p className="profile-status">🌊 Riding the waves of code</p>
+            <h1 className="profile-name">{userData?.displayName || 'Wave User'}</h1>
+            <p className="profile-tag">{currentUser?.email}</p>
+            <p className="profile-status">{userData?.statusText || '🌊 Riding the waves of code'}</p>
           </div>
         </div>
 
@@ -119,6 +157,7 @@ const Profile: React.FC = () => {
             expand="block" 
             color="danger" 
             className="logout-button animate-scale"
+            onClick={handleLogout}
           >
             <IonIcon icon={logOut} slot="start" />
             Log Out

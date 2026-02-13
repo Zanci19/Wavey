@@ -1,0 +1,112 @@
+.login-content {
+  --background: var(--discord-background-primary);
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-card {
+  background: var(--discord-background-secondary);
+  border-radius: 16px;
+  padding: 40px 32px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: scaleIn 0.4s ease-out;
+}
+
+.login-title {
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  margin: 0 0 8px 0;
+  color: var(--discord-text-normal);
+}
+
+.login-subtitle {
+  text-align: center;
+  color: var(--discord-text-muted);
+  margin: 0 0 32px 0;
+  font-size: 16px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.custom-input {
+  --background: var(--discord-background-primary);
+  --color: var(--discord-text-normal);
+  --placeholder-color: var(--discord-text-muted);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  border-radius: 8px;
+  height: 48px;
+  font-size: 16px;
+}
+
+.error-text {
+  text-align: center;
+  font-size: 14px;
+}
+
+.error-text p {
+  margin: 0;
+}
+
+.login-button {
+  --background: var(--discord-blurple);
+  --background-hover: #4752C4;
+  --border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 8px;
+  transition: transform 0.2s ease;
+}
+
+.login-button:active {
+  transform: scale(0.98);
+}
+
+.toggle-mode {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  color: var(--discord-blurple);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px;
+  transition: opacity 0.2s ease;
+}
+
+.toggle-button:hover {
+  opacity: 0.8;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

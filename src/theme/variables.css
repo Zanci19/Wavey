@@ -1,3 +1,13 @@
+/* Font imports and setup */
+* {
+  font-family: Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .title, .header-title {
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: 900;
+}
+
 /* Discord-inspired color scheme */
 :root {
   /* Discord colors */

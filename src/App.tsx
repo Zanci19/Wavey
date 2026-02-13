@@ -15,6 +15,8 @@ import Servers from './pages/Servers';
 import Friends from './pages/Friends';
 import Calls from './pages/Calls';
 import Profile from './pages/Profile';
+import Login from './pages/Login';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -48,47 +50,67 @@ import './theme/variables.css';
 
 setupIonicReact();
 
+// Protected Route component
+const ProtectedRoute: React.FC<{ component: React.FC<any>; exact?: boolean; path: string }> = ({ component: Component, ...rest }) => {
+  const { currentUser } = useAuth();
+  return (
+    <Route
+      {...rest}
+      render={(props: any) =>
+        currentUser ? <Component /> : <Redirect to="/login" />
+      }
+    />
+  );
+};
+
+const AppContent: React.FC = () => {
+  const { currentUser } = useAuth();
+
+  return (
+    <IonReactRouter>
+      <Route exact path="/login" component={Login} />
+      {currentUser ? (
+        <IonTabs>
+          <IonRouterOutlet>
+            <ProtectedRoute exact path="/servers" component={Servers} />
+            <ProtectedRoute exact path="/friends" component={Friends} />
+            <ProtectedRoute exact path="/calls" component={Calls} />
+            <ProtectedRoute exact path="/profile" component={Profile} />
+            <Route exact path="/">
+              <Redirect to="/servers" />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+            <IonTabButton tab="servers" href="/servers">
+              <IonIcon aria-hidden="true" icon={chatbubbles} />
+              <IonLabel>Servers</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="friends" href="/friends">
+              <IonIcon aria-hidden="true" icon={people} />
+              <IonLabel>Friends</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="calls" href="/calls">
+              <IonIcon aria-hidden="true" icon={call} />
+              <IonLabel>Calls</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="profile" href="/profile">
+              <IonIcon aria-hidden="true" icon={person} />
+              <IonLabel>Profile</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      ) : (
+        <Redirect to="/login" />
+      )}
+    </IonReactRouter>
+  );
+};
+
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/servers">
-            <Servers />
-          </Route>
-          <Route exact path="/friends">
-            <Friends />
-          </Route>
-          <Route exact path="/calls">
-            <Calls />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/servers" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
-          <IonTabButton tab="servers" href="/servers">
-            <IonIcon aria-hidden="true" icon={chatbubbles} />
-            <IonLabel>Servers</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="friends" href="/friends">
-            <IonIcon aria-hidden="true" icon={people} />
-            <IonLabel>Friends</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="calls" href="/calls">
-            <IonIcon aria-hidden="true" icon={call} />
-            <IonLabel>Calls</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="profile" href="/profile">
-            <IonIcon aria-hidden="true" icon={person} />
-            <IonLabel>Profile</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   </IonApp>
 );
 
