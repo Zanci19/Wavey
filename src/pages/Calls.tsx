@@ -1,6 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonAvatar, IonIcon, IonButton, IonModal, IonButtons } from '@ionic/react';
 import { call, videocam, mic, micOff, videocamOff, closeCircle, volumeHigh, person, checkmarkCircle, closeOutline } from 'ionicons/icons';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './Calls.css';
 
 interface CallHistory {
@@ -18,6 +18,7 @@ const Calls: React.FC = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
   const [callDuration, setCallDuration] = useState('00:00');
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const [callHistory] = useState<CallHistory[]>([
     { id: 1, name: 'Alex Wave', avatar: '👨‍💻', type: 'video', time: '2 hours ago', duration: '45:32', incoming: false },
@@ -33,15 +34,12 @@ const Calls: React.FC = () => {
     
     // Simulate call duration counter
     let seconds = 0;
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       seconds++;
       const mins = Math.floor(seconds / 60);
       const secs = seconds % 60;
       setCallDuration(`${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`);
     }, 1000);
-
-    // Store interval ID for cleanup
-    (window as any).callInterval = interval;
   };
 
   const endCall = () => {
@@ -49,8 +47,9 @@ const Calls: React.FC = () => {
     setCallDuration('00:00');
     setIsMuted(false);
     setIsVideoOff(false);
-    if ((window as any).callInterval) {
-      clearInterval((window as any).callInterval);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
   };
 
