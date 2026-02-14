@@ -25,6 +25,19 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Polyfill for global variable used by some dependencies
+      if (typeof global === 'undefined') {
+        window.global = window;
+      }
+      // Add process polyfill
+      window.process = window.process || { env: {} };
+    </script>
+    <script type="module">
+      // Import Buffer polyfill at the top level
+      import { Buffer } from 'buffer';
+      window.Buffer = Buffer;
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
