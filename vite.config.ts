@@ -13,7 +13,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      stream: 'stream-browserify',
+      stream: 'readable-stream',
       events: 'events',
       buffer: 'buffer',
       util: 'util',
@@ -25,7 +25,7 @@ export default defineConfig({
     global: 'globalThis',
   },
   optimizeDeps: {
-    include: ['buffer', 'process'],
+    include: ['buffer', 'process', 'stream-browserify', 'events'],
     esbuildOptions: {
       define: {
         global: 'globalThis'
