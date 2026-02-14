@@ -24,7 +24,7 @@ export default defineConfig({
     global: 'globalThis',
   },
   optimizeDeps: {
-    include: ['buffer', 'process', 'stream-browserify', 'events'],
+    include: ['buffer', 'process', 'readable-stream', 'events'],
     esbuildOptions: {
       define: {
         global: 'globalThis'
