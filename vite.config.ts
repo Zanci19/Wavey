@@ -3,7 +3,6 @@
 import legacy from '@vitejs/plugin-legacy'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,7 +12,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      stream: 'stream-browserify',
+      stream: 'readable-stream',
       events: 'events',
       buffer: 'buffer',
       util: 'util',
@@ -25,7 +24,7 @@ export default defineConfig({
     global: 'globalThis',
   },
   optimizeDeps: {
-    include: ['buffer', 'process'],
+    include: ['buffer', 'process', 'readable-stream', 'events'],
     esbuildOptions: {
       define: {
         global: 'globalThis'
